@@ -46,6 +46,21 @@ export default class MainScene extends Phaser.Scene {
             ondragend: (pointer,gameObject) => {
                 this.player.x = this.player.originalX;
                 this.player.y = this.player.originalY;
+                console.log(this.highlighted);
+                if(this.highlighted){
+                    switch(this.highlighted.cardtype){
+                        case 'attack':
+                            this.player.attack(this.highlighted.value);
+                            this.highlighted.dead = true;
+                            break;
+                        case 'heal':
+                            this.player.health = Math.min(this.player.health + this.highlighted.value,this.player.maxHealth);
+                            break;
+                        case 'armor':
+                            this.player.armor = this.highlighted.value;
+                            break;
+                    }
+                }
             },
         });
     }
