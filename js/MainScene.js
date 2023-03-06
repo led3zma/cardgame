@@ -26,9 +26,13 @@ export default class MainScene extends Phaser.Scene {
         this.load.image('troll','assets/troll.png');
 
         this.load.bitmapFont('pressstart', 'assets/pressstart.png','assets/pressstart.fnt');
+        this.waves = 0;
     }
 
     create(){
+        this.wavesText = this.add.bitmapText(this.game.config.width/2 - 80,this.game.config.height-50,'pressstart','Waves Completed - 0',16,Phaser.GameObjects.ALIGN_CENTER);
+        this.wavesText.depth = 5;
+        
         this.grid = new Grid({
             scene: this,
             columns: 3,
@@ -67,6 +71,8 @@ export default class MainScene extends Phaser.Scene {
                         addRestartButton(this);
                     }else{
                         this.grid.fadeFrontRow();
+                        this.waves++;
+                        this.wavesText.text = "Waves completed: " + this.waves.toString();
                     }
                 }
             },
