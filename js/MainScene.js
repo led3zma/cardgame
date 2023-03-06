@@ -43,7 +43,30 @@ export default class MainScene extends Phaser.Scene {
             image: 'paladin',
             health: 16,
             depth: 1,
-            ondragend: (pointer,gameObject) => {},
+            ondragend: (pointer,gameObject) => {
+                this.player.x = this.player.originalX;
+                this.player.y = this.player.originalY;
+            },
         });
+    }
+
+    update(time,delta){
+        this.grid.cards[0].highlighted = false;
+        this.grid.cards[1].highlighted = false;
+        this.grid.cards[2].highlighted = false;
+        this.highlighted = null;
+        let columnWidth = this.game.config.width / this.grid.columns;
+        if(this.player.y < 700){
+            if(this.player.x < columnWidth){
+                this.grid.cards[0].highlighted = true;
+                this.highlighted = this.grid.cards[0];
+            }else if(this.player.x > columnWidth * 2){
+                this.grid.cards[2].highlighted = true;
+                this.highlighted = this.grid.cards[2];
+            }else{
+                this.grid.cards[1].highlighted = true;
+                this.highlighted = this.grid.cards[1];
+            }
+        }
     }
 }
