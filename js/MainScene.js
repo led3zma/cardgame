@@ -1,5 +1,6 @@
 import CardPlayer from "../js/CardPlayer.js";
 import CardGrid from "../js/CardGrid.js";
+import Grid from "../js/Grid.js";
 
 export default class MainScene extends Phaser.Scene {
     constructor(){
@@ -27,14 +28,10 @@ export default class MainScene extends Phaser.Scene {
     }
 
     create(){
-        let testcard = new CardGrid({
+        this.grid = new Grid({
             scene: this,
-            name: 'Health Potion',
-            x: 200,
-            y: 200,
-            card: 'card',
-            image: 'healingpotion',
-            value: 12
+            columns: 3,
+            rows: 3,
         });
 
         this.player = new CardPlayer({
