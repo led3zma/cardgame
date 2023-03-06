@@ -31,4 +31,34 @@ export default class Grid {
             this.cards.push(card);
         }
     }
+
+    addBackRow(){
+        if(this.cards.length >= this.columns * this.rows) return;
+
+        this.addCards(6);
+    }
+
+    fadeFrontRow(){
+        setTimeout(() => {
+            this.cards.splice(0,3).forEach(card => {card.destroy();})
+            this.cards.forEach(card => {
+                this.scene.tweens.add({
+                    targets: card,
+                    duration: 400,
+                    y: card.y + this.yOffset,
+                    onComplete: () => this.addBackRow(),
+                });
+            });
+        },1000);
+
+        this.cards.slice(0,3).forEach(card => {
+            if(!card.selected){
+                this.scene.tweens.add({
+                    targets: card,
+                    alpha: 0,
+                    duration: 200,
+                });
+            }
+        });
+    }
 }

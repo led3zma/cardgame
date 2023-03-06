@@ -1,5 +1,4 @@
 import CardPlayer from "../js/CardPlayer.js";
-import CardGrid from "../js/CardGrid.js";
 import Grid from "../js/Grid.js";
 
 export default class MainScene extends Phaser.Scene {
@@ -48,6 +47,7 @@ export default class MainScene extends Phaser.Scene {
                 this.player.y = this.player.originalY;
                 console.log(this.highlighted);
                 if(this.highlighted){
+                    this.highlighted.selected = true;
                     switch(this.highlighted.cardtype){
                         case 'attack':
                             this.player.attack(this.highlighted.value);
@@ -60,6 +60,7 @@ export default class MainScene extends Phaser.Scene {
                             this.player.armor = this.highlighted.value;
                             break;
                     }
+                    this.grid.fadeFrontRow();
                 }
             },
         });
