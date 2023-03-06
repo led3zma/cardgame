@@ -48,6 +48,7 @@ export default class MainScene extends Phaser.Scene {
                 this.player.x = this.player.originalX;
                 this.player.y = this.player.originalY;
                 if(this.highlighted){
+                    this.player.originalX = this.player.x = this.highlighted.x;
                     this.highlighted.selected = true;
                     switch(this.highlighted.cardtype){
                         case 'attack':
@@ -78,7 +79,8 @@ export default class MainScene extends Phaser.Scene {
         this.grid.cards[2].highlighted = false;
         this.highlighted = null;
         let columnWidth = this.game.config.width / this.grid.columns;
-        if(this.player.y < 700){
+        let xDiff = Math.abs(this.player.x - this.player.originalX);
+        if(this.player.y < 700 && xDiff < columnWidth * 1.4){
             if(this.player.x < columnWidth){
                 this.grid.cards[0].highlighted = true;
                 this.highlighted = this.grid.cards[0];
