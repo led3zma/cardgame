@@ -4,8 +4,8 @@ export default class CardPlayer extends CardDraggable {
     constructor(data){
         let { health } = data;
         super(data);
-        this.textHealth = new Phaser.GameObjects.BitmapText(this.scene,0,-100,'pressstart',health);
-        this.textMaxHealth = new Phaser.GameObjects.BitmapText(this.scene,0,0,'pressstart',health,12);
+        this.textHealth = new Phaser.GameObjects.BitmapText(this.scene,0,-102,'pressstart',health);
+        this.textMaxHealth = new Phaser.GameObjects.BitmapText(this.scene,-20,-90,'pressstart',health,12);
         this.textArmor = new Phaser.GameObjects.BitmapText(this.scene,0,0,'pressstart');
         this.spriteArmor = new Phaser.GameObjects.Sprite(this.scene,50,-80,'armor');
         this.textHealth.tint = 0;
